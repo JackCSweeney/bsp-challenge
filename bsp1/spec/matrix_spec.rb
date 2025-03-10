@@ -60,5 +60,39 @@ RSpec.describe Matrix do
         end
       end
     end
+
+    describe '#directions_to_princess' do
+      describe 'Happy Path' do
+        it 'returns the correct steps needed to save the princess' do
+          matrix = Matrix.new(3, ['-p-','-m-','---'])
+          robot = Robot.new(matrix.get_robot_coords)
+
+          expect(robot.directions_to_princess).to eq(["UP"])
+        end
+
+        it 'can return the correct steps with the princess in a different location' do
+          matrix = Matrix.new(3, ['--p','-m-','---'])
+          robot = Robot.new(matrix.get_robot_coords)
+
+          expect(robot.directions_to_princess).to eq(["UP", "RIGHT"])
+        end
+
+        it 'can return the correct steps with a different sized grid' do
+          matrix = Matrix.new(5, ['-----','-----','--m--','-----','----p'])
+
+          robot = Robot.new(matrix.get_robot_coords)
+
+          expect(robot.directions_to_princess).to eq(["DOWN", "DOWN", "RIGHT", "RIGHT"])
+        end
+
+        it 'can return the correct steps with a different sized grid going left' do
+          matrix = Matrix.new(5, ['-----','-----','--m--','-----','p----'])
+
+          robot = Robot.new(matrix.get_robot_coords)
+
+          expect(robot.directions_to_princess).to eq(["DOWN", "DOWN", "LEFT", "LEFT"])
+        end
+      end
+    end
   end
 end
