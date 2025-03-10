@@ -5,18 +5,21 @@ class Matrix
     @size = size
     @grid = rows.map {|row| row.chars}
     @princess_coords = []
+    @robot_coords = []
   end
 
   def get_princess_coords
     for i in (0...@size) do
       for j in (0...@size) do
         if @grid[i][j] == 'p'
-          @princess_coords = [j, i]
-          break
+          return @princess_coords = [j, i]
         end
       end
     end
+  end
 
-    @princess_coords
+  def get_robot_coords
+    center = @size / 2
+    @robot_coords = [center, center]
   end
 end
