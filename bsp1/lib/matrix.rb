@@ -1,14 +1,14 @@
 require 'robot.rb'
+require 'princess.rb'
 
 class Matrix
-  attr_reader :size, :grid, :robot
+  attr_reader :size, :grid, :robot, :princess
 
   def initialize(size, rows)
     @size = size
     @grid = rows.map {|row| row.chars}
-    @princess_coords = get_princess_coords
-    @robot_coords = get_robot_coords
-    @robot = Robot.new(@robot_coords)
+    @robot = Robot.new(get_robot_coords)
+    @princess = Princess.new(get_princess_coords)
   end
 
   def get_princess_coords
