@@ -8,6 +8,12 @@ RSpec.describe PrincessSaver do
 
       expect(princess_saver).to be_a(PrincessSaver)
     end
+
+    it 'is initialized with an empty array for directions attribute' do
+      princess_saver = PrincessSaver.new
+
+      expect(princess_saver.directions).to eq([])
+    end
   end
 
   before(:each) do
