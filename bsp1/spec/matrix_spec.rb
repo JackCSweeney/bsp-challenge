@@ -27,6 +27,13 @@ RSpec.describe Matrix do
       expect(matrix.robot).to be_a(Robot)
       expect(matrix.robot.coords).to eq([1,1])
     end
+
+    it 'has a readable princess attribute that is an instance of a princess with the correct coords' do
+      matrix = Matrix.new(3, ['p--','-m-','---'])
+
+      expect(matrix.princess).to be_a(Princess)
+      expect(matrix.princess.coords).to eq([0,0])
+    end
   end
 
   describe '#instance methods' do
