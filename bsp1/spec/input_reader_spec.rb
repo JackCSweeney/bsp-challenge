@@ -8,21 +8,36 @@ RSpec.describe InputReader do
 
       expect(reader).to be_a(InputReader)
     end
+
+    it 'is initialized with size and matrix_rows attributes as 0 and an empty array' do
+      reader = InputReader.new
+
+      expect(reader.size).to eq(0)
+      expect(reader.matrix_rows).to eq([])
+    end
   end
 
-  describe '.class methods' do
+  before(:each) do
+    @reader = InputReader.new
+  end
+
+  describe '#instance methods' do
     describe '.get_matrix_size' do
       describe 'Happy Path' do
         it 'gets the size of the matrix from the stdin' do
           allow($stdin).to receive(:gets).and_return('5')
 
-          expect(InputReader.get_matrix_size).to eq(5)
+          @reader.get_matrix_size
+
+          expect(@reader.size).to eq(5)
         end
 
         it 'works with a different size' do
           allow($stdin).to receive(:gets).and_return('3')
 
-          expect(InputReader.get_matrix_size).to eq(3)
+          @reader.get_matrix_size
+
+          expect(@reader.size).to eq(3)
         end
       end
 
@@ -30,19 +45,69 @@ RSpec.describe InputReader do
         it 'raises an error message if the input value is not odd' do
           allow($stdin).to receive(:gets).and_return('4')
 
-          expect {InputReader.get_matrix_size}.to raise_error(ArgumentError)
+          expect {@reader.get_matrix_size}.to raise_error(ArgumentError)
         end
 
         it 'raises an error message if the input value is below 3' do
           allow($stdin).to receive(:gets).and_return('1')
 
-          expect {InputReader.get_matrix_size}.to raise_error(ArgumentError)
+          expect {@reader.get_matrix_size}.to raise_error(ArgumentError)
         end
 
         it 'raises an error message if the input value is greater than 100' do
           allow($stdin).to receive(:gets).and_return('101')
 
-          expect {InputReader.get_matrix_size}.to raise_error(ArgumentError)
+          expect {@reader.get_matrix_size}.to raise_error(ArgumentError)
+        end
+      end
+    end
+
+    describe '.get_matrix_rows' do
+      describe 'Happy Path' do
+        it 'can add input rows to its attribute of matrix rows' do
+          allow($stdin).to receive(:gets).and_return("3")
+
+          @reader.get_matrix_size
+
+          allow($stdin).to receive(:gets).and_return("---\n---\n---")
+
+          @reader.get_matrix_rows
+
+          expect(@reader.matrix_rows).to eq(['---', '---', '---'])
+        end
+
+        it 'can add different number of input rows to its attribute of matrix rows' do
+          allow($stdin).to receive(:gets).and_return("5")
+
+          @reader.get_matrix_size
+
+          allow($stdin).to receive(:gets).and_return("-----\n-----\n-----\n-----\n-----")
+
+          @reader.get_matrix_rows
+
+          expect(@reader.matrix_rows).to eq(['-----', '-----', '-----', '-----', '-----'])
+        end
+      end
+
+      describe 'Sad Path' do
+        it 'raises an error message if the number of rows do not match the input size' do
+          allow($stdin).to receive(:gets).and_return("5")
+
+          @reader.get_matrix_size
+
+          allow($stdin).to receive(:gets).and_return("-----\n-----\n-----\n-----")
+          
+          expect {@reader.get_matrix_rows}.to raise_error(ArgumentError)
+        end
+
+        it 'raises an error message if the length of the rows does not match the matrix size' do
+          allow($stdin).to receive(:gets).and_return("3")
+
+          @reader.get_matrix_size
+
+          allow($stdin).to receive(:gets).and_return("---\n---\n--")
+
+          expect {@reader.get_matrix_rows}.to raise_error(ArgumentError)
         end
       end
     end
