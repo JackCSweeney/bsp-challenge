@@ -51,5 +51,37 @@ RSpec.describe Robot do
         end
       end
     end
+
+    describe '#x_directions(x_val)' do
+      it 'adds the directions needed on the x-axis to the directions attribute of robot' do
+        robot = Robot.new([2,2])
+        robot.x_directions(-2)
+        
+        expect(robot.directions).to eq(["RIGHT", "RIGHT"])
+      end
+
+      it 'works in the other direction' do
+        robot = Robot.new([2,2])
+        robot.x_directions(2)
+        
+        expect(robot.directions).to eq(["LEFT", "LEFT"])
+      end
+    end
+
+    describe '#y_directions(y_val)' do
+      it 'adds the directions needed on the y-axis to the directions attribute of robot' do
+        robot = Robot.new([2,2])
+        robot.y_directions(2)
+        
+        expect(robot.directions).to eq(["UP", "UP"])
+      end
+
+      it 'works in the other direction' do
+        robot = Robot.new([2,2])
+        robot.y_directions(-2)
+        
+        expect(robot.directions).to eq(["DOWN", "DOWN"])
+      end
+    end
   end
 end
