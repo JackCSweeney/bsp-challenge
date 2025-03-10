@@ -23,7 +23,7 @@ RSpec.describe Matrix do
   end
 
   describe '#instance methods' do
-    describe '.get_princess_coords' do
+    describe '#get_princess_coords' do
       describe 'Happy Path' do
         it 'will return the coordinates of the princess within the grid' do
           matrix = Matrix.new(3, ['-p-','---','---'])
@@ -41,6 +41,22 @@ RSpec.describe Matrix do
           matrix = Matrix.new(5, ['-----','-----','p----','-----','-----'])
 
           expect(matrix.get_princess_coords).to eq([0,2])
+        end
+      end
+    end
+
+    describe '#get_robot_coords' do
+      describe 'Happy Path' do
+        it 'will return the location of the robot from the grid' do
+          matrix = Matrix.new(3, ['-p-','-m-','---'])
+
+          expect(matrix.get_robot_coords).to eq([1,1])
+        end
+
+        it 'will return the location of the robot from a different size grid' do
+          matrix = Matrix.new(5, ['-----','-----','p-m--','-----','-----'])
+
+          expect(matrix.get_robot_coords).to eq([2,2])
         end
       end
     end
