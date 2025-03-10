@@ -18,30 +18,30 @@ RSpec.describe PrincessSaver do
 
   before(:each) do
     @saver = PrincessSaver.new
-    @input_1 = [['-','-','-'],
-                ['p','-','-'],
-                ['-','-','m']]
-    @input_2 = [['-','-','-','-','-','m','-'],
+    @input_1 = [['p','-','-'],
+                ['-','m','-'],
+                ['-','-','-']]
+    @input_2 = [['-','-','-','-','-','-','-'],
                 ['-','-','-','-','-','-','-'],
                 ['-','-','-','-','-','-','-'],
-                ['-','-','-','-','-','-','-'],
+                ['-','-','-','m','-','-','-'],
                 ['-','-','-','-','-','-','-'],
                 ['p','-','-','-','-','-','-'],
                 ['-','-','-','-','-','-','-']]
-    @input_3 = [['m','-','-','-','-','-','-','-','-'],
+    @input_3 = [['-','-','-','-','-','-','-','-','-'],
                 ['-','-','-','-','-','-','-','-','-'],
                 ['-','-','-','-','-','-','-','-','-'],
                 ['-','-','-','-','-','-','-','-','-'],
+                ['-','-','-','-','m','-','-','-','-'],
                 ['-','-','-','-','-','-','-','-','-'],
                 ['-','-','-','-','-','-','-','-','-'],
-                ['-','-','-','-','-','-','-','-','-'],
-                ['-','-','p','-','-','-','-','-','-'],
+                ['-','-','-','-','-','-','-','p','-'],
                 ['-','-','-','-','-','-','-','-','-']]
-    @input_4 = [['-','-','p','-','-'],
+    @input_4 = [['-','-','-','p','-'],
                 ['-','-','-','-','-'],
+                ['-','-','m','-','-'],
                 ['-','-','-','-','-'],
-                ['-','-','-','-','-'],
-                ['m','-','-','-','-']]
+                ['-','-','-','-','-']]
   end
 
   describe '#find_directions(grid)' do
@@ -50,16 +50,16 @@ RSpec.describe PrincessSaver do
         directions = @saver.find_directions(@input_1)
 
         expect(directions).to be_a(Array)
-        expect(directions.length).to eq(3)
-        expect(directions).to eq(["LEFT", "LEFT", "UP"])
+        expect(directions.length).to eq(2)
+        expect(directions).to eq(["LEFT", "UP"])
       end
 
       it 'can find the right directions for a 7x7 board' do
         directions = @saver.find_directions(@input_2)
 
         expect(directions).to be_a(Array)
-        expect(directions.length).to eq(10)
-        expect(directions).to eq(["LEFT", "LEFT", "LEFT", "LEFT", "LEFT", "DOWN", "DOWN", "DOWN", "DOWN", "DOWN"])
+        expect(directions.length).to eq(5)
+        expect(directions).to eq(["LEFT", "LEFT", "LEFT", "DOWN", "DOWN"])
       end
 
       it 'can find the right directions for a 9x9 board' do
@@ -67,7 +67,7 @@ RSpec.describe PrincessSaver do
 
         expect(directions).to be_a(Array)
         expect(directions.length).to eq(9)
-        expect(directions).to eq(["RIGHT", "RIGHT", "DOWN", "DOWN", "DOWN", "DOWN", "DOWN", "DOWN", "DOWN"])
+        expect(directions).to eq(["RIGHT", "RIGHT", "RIGHT", "DOWN", "DOWN", "DOWN"])
       end
 
       it 'can find the right directions for a 5x5 board' do
@@ -75,7 +75,7 @@ RSpec.describe PrincessSaver do
 
         expect(directions).to be_a(Array)
         expect(directions.length).to eq(6)
-        expect(directions).to eq(["RIGHT", "RIGHT", "UP", "UP", "UP", "UP"])
+        expect(directions).to eq(["RIGHT", "UP", "UP"])
       end
     end
   end
