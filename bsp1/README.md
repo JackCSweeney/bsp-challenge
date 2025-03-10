@@ -28,3 +28,55 @@ The above sample input is just to help you understand the format. The princess (
 
 ### Scoring
 Your score is calculated as follows : (NxN - number of moves made to rescue the princess)/10, where N is the size of the grid (3x3 in the sample testcase).
+
+### Starting Code from HackerRank
+```
+#!/bin/ruby
+
+def displayPathtoPrincess(n,grid)
+  return ""
+end
+
+m = gets.to_i
+
+grid = Array.new(m)
+
+(0...m).each do |i|
+    grid[i] = gets.strip
+end
+
+displayPathtoPrincess(m,grid)
+```
+
+## Planning Notes
+### Consolidated Challenge Overview
+- Task is to create a program that will take two arguments, n and grid, and return the directions that the robot within the grid will have to take in order to get to the princess in the least amount of steps possible
+  - Constraints:
+    - n will always be an odd integer between 3 and 100, denotes the size of the grid being input
+    - grid will always have individual cells denoted by a dash/flag '-'
+    - grid will contain an 'm' representing the robot
+    - grid will contain a 'p' representing the princess
+    - The final output should be consecutive lines printing the directions taken to reach the princess (i.e. LEFT, RIGHT, UP, DOWN)
+
+### Initial Thoughts
+- Will need to build some initial test cases for final result
+  - Can add additional tests as different edge cases are identified and as the problem is broken down into different parts
+- Will want to keep in mind object oriented design principles throughout
+  - Lean on the 4 pillars where it makes sense (Abstraction, Polymorphism, Encapsulation, Inheritance)
+- Will want to adhere to SRP, so building out some different classes and utilizing helper methods where needed
+- Probably a good idea to build in some error handling for incorrect input
+- Can create a runner file for it to run on its own within the terminal
+- Can create a separate file to combine all of the different code that should be copy pasted into the HackerRank challenge page
+
+- Problem aspects:
+  - Since the input for the problem is coming from STDIN, will need to use 'gets' or 'ARGF'
+    - Good spot to build a specific class to handle the input
+    - Good spot to include some error handling from the input that is received
+  - Traversing a matrix
+    - Since we are only receiving the matrix/grid and its size, not only do we have to traverse the matrix to find the quickest path to princess, also have to find where the robot is starting from and where the princess is located
+      - Could potentially have the process that builds the grid identify where the robot starts and where the princess is, then create them as objects that store their locations
+      - This would prevent having to iterate through the matrix multiple times to find them after grid is created
+      - Alternatively, could have the grid be created and use lazy loading to find the princess and robot, but this seems like it may still be a slower/inefficient process compared to having them be created as the grid is being made
+    - If the bot and princess are each their own class, and have their coordinates saved as attributes, finding the quickest path becomes fairly simple since the number of steps needed to be taken would be the difference of each coordinates sum (it's absolute value)
+      - Since we need to print the steps to get there though, will have to instead just add/subtract from x and y coords of bot to make its coords match princess, and depending on which it does, print those directions, or store them as an attribute for the bot
+  
