@@ -7,7 +7,7 @@ class InputReader
   end
 
   def get_matrix_size
-    size = $stdin.gets[0].to_i
+    size = $stdin.gets.to_i
     @size = validate_size_input(size)
   end
 

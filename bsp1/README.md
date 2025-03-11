@@ -1,4 +1,4 @@
-# Challenge
+# Challenge 1
 Princess Peach is trapped in one of the four corners of a square grid. You are in the center of the grid and can move one step at a time in any of the four directions. Can you rescue the princess?
 
 ### Input format:
@@ -89,4 +89,70 @@ displayPathtoPrincess(m,grid)
   - Have InputReader class that will read from the stdin and create bot, princess, and matrix? might not even need matrix since we can just grab the coords as it comes in, but we will want to also store the size
   - Matrix class that holds onto the size and rows of matrix, will also hold onto robot and princess objects
   - Runner file to make it run in terminal
-  
+
+# Challenge 2
+In this version of "Bot saves princess", Princess Peach and bot's position are randomly set. Can you save the princess?
+
+### Task
+Complete the function nextMove which takes in 4 parameters - an integer N, integers r and c indicating the row & column position of the bot and the character array grid - and outputs the next move the bot makes to rescue the princess.
+
+### Input Format
+The first line of the input is N (<100), the size of the board (NxN). The second line of the input contains two space separated integers, which is the position of the bot.
+
+Grid is indexed using Matrix Convention
+
+The position of the princess is indicated by the character 'p' and the position of the bot is indicated by the character 'm' and each cell is denoted by '-' (ascii value: 45).
+
+### Output Format
+Output only the next move you take to rescue the princess. Valid moves are LEFT, RIGHT, UP or DOWN
+
+### Sample Input
+```
+5
+2 3
+-----
+-----
+p--m-
+-----
+-----
+```
+### Sample Output
+```
+LEFT
+```
+### Resultant State
+```
+-----
+-----
+p-m--
+-----
+-----
+```
+### Explanation
+As you can see, bot is one step closer to the princess.
+
+### Scoring
+Your score for every testcase would be (NxN minus number of moves made to rescue the princess)/10 where N is the size of the grid (5x5 in the sample testcase). Maximum score is 17.5
+
+## Planning Notes
+### Consolidated Overview
+- The bot and princess are now able to be placed in different positions on the grid instead of just the corners for princess and center for bot
+- Program will now receive 4 different inputs, size of grid, then row placement of bot, then column placement of bot, then the grid
+- Now, the output should not be the entire list of moves to get to the princess, but only the next move that needs to be made
+
+### Initial Thoughts
+- Can reuse most of what has already been built
+- Could potentially utilize a module for some of the new behavior that will exist?
+  - Would love to introduce some inheritance somewhere that it makes sense, but don't want to force it for the sake of it
+- Can utilize the same input reader methods for matrix size and rows, plus their validations, will just need to add in a method to get bot placement
+- Can use same directions to princess method from bot since it's just using the coordinates from each
+- Could swap back to old find_princess method/rewrite to search for it so that it's the same through both problems
+- If I use some sort of conditional statement when the input reader is reading the second line of input, it could check if the first char is an int, if yes, it runs through the solution for problem 2, if no it runs through the solution for problem 1
+
+- Planning:
+  - Update directory name to just be bsp
+  - Add method to input_reader to get the bot coordinates from input, include condition that checks if input being received is the start of the rows or the coordinates of bot
+  - Update find_princess method / add new one that is called based what input was received
+  - Add next_move method to robot that pulls the next move out of directions and returns it
+  - Update save_princess method to only puts the first direction if challenge 2 is detected
+    - Could add an attribute to the saver that defaults to false unless the second input detected is the coordinates
