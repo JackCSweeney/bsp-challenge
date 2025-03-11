@@ -40,21 +40,27 @@ RSpec.describe Matrix do
     describe '#get_princess_coords' do
       describe 'Happy Path' do
         it 'will return the coordinates of the princess within the grid' do
-          matrix = Matrix.new(3, ['---','---','--p'])
+          matrix = Matrix.new(3, ['---','-m-','--p'])
 
           expect(matrix.get_princess_coords).to eq([2,2])
         end
 
         it 'can return the coordinates with the princess in a different location' do
-          matrix = Matrix.new(3, ['---','---','p--'])
+          matrix = Matrix.new(3, ['---','-m-','p--'])
 
           expect(matrix.get_princess_coords).to eq([0,2])
         end
 
         it 'can return the coordinates with a different size grid' do
-          matrix = Matrix.new(5, ['----p','-----','-----','-----','-----'])
+          matrix = Matrix.new(5, ['----p','-----','--m--','-----','-----'])
 
           expect(matrix.get_princess_coords).to eq([4,0])
+        end
+
+        it 'can return the coordinates for the princess in a location other than the 4 corners' do
+          matrix = Matrix.new(5, ['-----','-p---','--m--','-----','-----'])
+
+          expect(matrix.get_princess_coords).to eq([1,1])
         end
       end
     end
