@@ -2,80 +2,64 @@ require_relative './spec_helper'
 require_relative '../lib/princess_saver.rb'
 
 RSpec.describe PrincessSaver do
-  describe '.Initialize' do
+  describe 'Initialize' do
     it 'exists' do
       princess_saver = PrincessSaver.new
 
       expect(princess_saver).to be_a(PrincessSaver)
     end
-
-    it 'is initialized with an empty array for directions attribute' do
-      princess_saver = PrincessSaver.new
-
-      expect(princess_saver.directions).to eq([])
-    end
   end
 
   before(:each) do
     @saver = PrincessSaver.new
-    @input_1 = [['p','-','-'],
-                ['-','m','-'],
-                ['-','-','-']]
-    @input_2 = [['-','-','-','-','-','-','-'],
-                ['-','-','-','-','-','-','-'],
-                ['-','-','-','-','-','-','-'],
-                ['-','-','-','m','-','-','-'],
-                ['-','-','-','-','-','-','-'],
-                ['p','-','-','-','-','-','-'],
-                ['-','-','-','-','-','-','-']]
-    @input_3 = [['-','-','-','-','-','-','-','-','-'],
-                ['-','-','-','-','-','-','-','-','-'],
-                ['-','-','-','-','-','-','-','-','-'],
-                ['-','-','-','-','-','-','-','-','-'],
-                ['-','-','-','-','m','-','-','-','-'],
-                ['-','-','-','-','-','-','-','-','-'],
-                ['-','-','-','-','-','-','-','-','-'],
-                ['-','-','-','-','-','-','-','p','-'],
-                ['-','-','-','-','-','-','-','-','-']]
-    @input_4 = [['-','-','-','p','-'],
-                ['-','-','-','-','-'],
-                ['-','-','m','-','-'],
-                ['-','-','-','-','-'],
-                ['-','-','-','-','-']]
+    @input_1 = "p--\n-m-\n---"
+    @input_2 = "-------\n-------\n-------\n---m---\n-------\np------\n-------"
+    @input_3 = "---------\n---------\n---------\n---------\n----m----\n---------\n---------\n-------p-\n---------"
+    @input_4 = "---p-\n-----\n--m--\n-----\n-----"
   end
 
-  describe '#find_directions(grid)' do
-    describe 'different board sizes and all 4 directions' do
-      it 'can find the right directions for a 3x3 board' do
-        directions = @saver.find_directions(@input_1)
+  describe '#instance methods' do
+    describe '#save_princess' do
+      describe 'different board sizes and all 4 directions' do
+        it 'can find the right directions for a 3x3 board' do
+          allow($stdin).to receive(:gets).and_return("3")
+          @saver.input_reader.get_matrix_size
+          allow($stdin).to receive(:gets).and_return(@input_1)
+          @saver.input_reader.get_matrix_rows
+          expected = "LEFT\nUP\n"
 
-        expect(directions).to be_a(Array)
-        expect(directions.length).to eq(2)
-        expect(directions).to eq(["LEFT", "UP"])
-      end
+          expect {@saver.save_princess}.to output(expected).to_stdout
+        end
 
-      it 'can find the right directions for a 7x7 board' do
-        directions = @saver.find_directions(@input_2)
+        it 'can find the right directions for a 7x7 board' do
+          allow($stdin).to receive(:gets).and_return("7")
+          @saver.input_reader.get_matrix_size
+          allow($stdin).to receive(:gets).and_return(@input_2)
+          @saver.input_reader.get_matrix_rows
+          expected = "LEFT\nLEFT\nLEFT\nDOWN\nDOWN\n"
 
-        expect(directions).to be_a(Array)
-        expect(directions.length).to eq(5)
-        expect(directions).to eq(["LEFT", "LEFT", "LEFT", "DOWN", "DOWN"])
-      end
+          expect {@saver.save_princess}.to output(expected).to_stdout
+        end
 
-      it 'can find the right directions for a 9x9 board' do
-        directions = @saver.find_directions(@input_3)
+        it 'can find the right directions for a 9x9 board' do
+          allow($stdin).to receive(:gets).and_return("9")
+          @saver.input_reader.get_matrix_size
+          allow($stdin).to receive(:gets).and_return(@input_3)
+          @saver.input_reader.get_matrix_rows
+          expected = "RIGHT\nRIGHT\nRIGHT\nDOWN\nDOWN\nDOWN\n"
 
-        expect(directions).to be_a(Array)
-        expect(directions.length).to eq(9)
-        expect(directions).to eq(["RIGHT", "RIGHT", "RIGHT", "DOWN", "DOWN", "DOWN"])
-      end
+          expect {@saver.save_princess}.to output(expected).to_stdout
+        end
 
-      it 'can find the right directions for a 5x5 board' do
-        directions = @saver.find_directions(@input_4)
+        it 'can find the right directions for a 5x5 board' do
+          allow($stdin).to receive(:gets).and_return("5")
+          @saver.input_reader.get_matrix_size
+          allow($stdin).to receive(:gets).and_return(@input_4)
+          @saver.input_reader.get_matrix_rows
+          expected = "RIGHT\nUP\nUP\n"
 
-        expect(directions).to be_a(Array)
-        expect(directions.length).to eq(6)
-        expect(directions).to eq(["RIGHT", "UP", "UP"])
+          expect {@saver.save_princess}.to output(expected).to_stdout
+        end
       end
     end
   end
