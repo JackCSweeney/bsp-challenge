@@ -1,5 +1,5 @@
-require 'input_reader.rb'
-require 'matrix.rb'
+require_relative 'input_reader.rb'
+require_relative 'matrix.rb'
 
 class PrincessSaver
   attr_reader :input_reader
