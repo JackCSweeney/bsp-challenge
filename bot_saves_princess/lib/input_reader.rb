@@ -30,8 +30,9 @@ class InputReader
   end
 
   def get_robot_coordinates
-    if $stdin.gets.match(/[[:digit:]]/)
-      coords = $stdin.gets.split.map(&:to_i).reverse
+    input = $stdin.gets
+    if /[[:digit:]]/.match(input)
+      coords = input.split.map(&:to_i).reverse
       @robot_coordinates = validate_robot_coordinates(coords)
     end
   end
