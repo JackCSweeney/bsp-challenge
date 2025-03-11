@@ -53,6 +53,7 @@ displayPathtoPrincess(m,grid)
 - Task is to create a program that will take two arguments, n and grid, and return the directions that the robot within the grid will have to take in order to get to the princess in the least amount of steps possible
   - Constraints:
     - n will always be an odd integer between 3 and 100, denotes the size of the grid being input
+    - m will always be in the center of the grid
     - grid will always have individual cells denoted by a dash/flag '-'
     - grid will contain an 'm' representing the robot
     - grid will contain a 'p' representing the princess
@@ -79,4 +80,13 @@ displayPathtoPrincess(m,grid)
       - Alternatively, could have the grid be created and use lazy loading to find the princess and robot, but this seems like it may still be a slower/inefficient process compared to having them be created as the grid is being made
     - If the bot and princess are each their own class, and have their coordinates saved as attributes, finding the quickest path becomes fairly simple since the number of steps needed to be taken would be the difference of each coordinates sum (it's absolute value)
       - Since we need to print the steps to get there though, will have to instead just add/subtract from x and y coords of bot to make its coords match princess, and depending on which it does, print those directions, or store them as an attribute for the bot
+  
+- Planning:
+  - Have PrincessSaver class that is responsible for creating final output from stdin input
+  - Have bot class that contains attributes of its location coordinates
+    - will also hold onto logic for creating directions to princess
+  - Have princess class that contains attributes of its location coordinates
+  - Have InputReader class that will read from the stdin and create bot, princess, and matrix? might not even need matrix since we can just grab the coords as it comes in, but we will want to also store the size
+  - Matrix class that holds onto the size and rows of matrix, will also hold onto robot and princess objects
+  - Runner file to make it run in terminal
   
