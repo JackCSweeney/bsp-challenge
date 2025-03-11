@@ -30,7 +30,13 @@ class InputReader
 
   def get_robot_coordinates
     if /[[:digit:]]/.match($stdin.gets[0])
-      @robot_coordinates = $stdin.gets.split.map(&:to_i).reverse
+      coords = $stdin.gets.split.map(&:to_i).reverse
+      @robot_coordinates = validate_robot_coordinates(coords)
     end
+  end
+
+  def validate_robot_coordinates(coords)
+    raise ArgumentError.new("Invalid location: Robot coordinates must fit with the size of the grid using matrix convention") if coords.any?{|num| num >= @size}
+    coords
   end
 end
