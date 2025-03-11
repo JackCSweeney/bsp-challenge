@@ -23,4 +23,11 @@ class PrincessSaver
     make_matrix
     puts matrix.robot.directions_to_princess(matrix.princess.coords)
   end
+
+  def next_move
+    get_input
+    make_matrix
+    matrix.robot.directions_to_princess(matrix.princess.coords)
+    puts matrix.robot.next_move
+  end
 end
