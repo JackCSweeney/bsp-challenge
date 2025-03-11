@@ -8,8 +8,8 @@ class InputReader
   end
 
   def get_matrix_size
-    size = $stdin.gets.to_i
-    @size = validate_size_input(size)
+    non_validated_size = $stdin.gets.to_i
+    @size = validate_size_input(non_validated_size)
   end
 
   def validate_size_input(size)
@@ -18,7 +18,8 @@ class InputReader
   end
 
   def get_matrix_rows
-    rows = $stdin.gets.split[1..-1]
+    rows = []
+    @size.times {rows << $stdin.gets.chomp}
     @matrix_rows = validate_row_input(rows)
   end
 
@@ -29,7 +30,7 @@ class InputReader
   end
 
   def get_robot_coordinates
-    if /[[:digit:]]/.match($stdin.gets[0])
+    if $stdin.gets.match(/[[:digit:]]/)
       coords = $stdin.gets.split.map(&:to_i).reverse
       @robot_coordinates = validate_robot_coordinates(coords)
     end
