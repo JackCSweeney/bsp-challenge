@@ -142,6 +142,15 @@ RSpec.describe InputReader do
           expect {@reader.get_robot_coordinates}.to raise_error(ArgumentError)
           expect {@reader.get_robot_coordinates}.to raise_error("Invalid location: Robot coordinates must fit with the size of the grid using matrix convention")
         end
+
+        it 'raises the correct error if only given 1 coordinate' do
+          allow($stdin).to receive(:gets).and_return("3")
+          @reader.get_matrix_size
+          allow($stdin).to receive(:gets).and_return("3 0")
+
+          expect {@reader.get_robot_coordinates}.to raise_error(ArgumentError)
+          expect {@reader.get_robot_coordinates}.to raise_error("Invalid location: Robot coordinates must fit with the size of the grid using matrix convention")
+        end
       end
     end
   end
