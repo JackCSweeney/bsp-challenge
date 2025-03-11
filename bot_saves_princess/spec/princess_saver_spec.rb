@@ -12,38 +12,35 @@ RSpec.describe PrincessSaver do
 
   before(:each) do
     @saver = PrincessSaver.new
-    @input_1 = "3\np--\n-m-\n---"
-    @input_2 = "7\n-------\n-------\n-------\n---m---\n-------\n-------\np------"
-    @input_3 = "9\n---------\n---------\n---------\n---------\n----m----\n---------\n---------\n---------\n--------p"
-    @input_4 = "5\n----p\n-----\n--m--\n-----\n-----"
   end
 
   describe '#instance methods' do
     describe '#save_princess' do
       describe 'different board sizes and all 4 directions' do
         it 'can find the right directions for a 3x3 board' do
-          allow($stdin).to receive(:gets).and_return(@input_1)
+          # additional empty string added to account for not being able to force stub to be reused and provide sequential input values at the same time to :gets
+          allow($stdin).to receive(:gets).and_return("3","","p--","-m-","---")
           expected = "LEFT\nUP\n"
 
           expect {@saver.save_princess}.to output(expected).to_stdout
         end
 
         it 'can find the right directions for a 7x7 board' do
-          allow($stdin).to receive(:gets).and_return(@input_2)
+          allow($stdin).to receive(:gets).and_return("7","","-------","-------","-------","---m---","-------","-------","p------")
           expected = "LEFT\nLEFT\nLEFT\nDOWN\nDOWN\nDOWN\n"
 
           expect {@saver.save_princess}.to output(expected).to_stdout
         end
 
         it 'can find the right directions for a 9x9 board' do
-          allow($stdin).to receive(:gets).and_return(@input_3)
+          allow($stdin).to receive(:gets).and_return("9","","---------","---------","---------","---------","----m----","---------","---------","---------","--------p")
           expected = "RIGHT\nRIGHT\nRIGHT\nRIGHT\nDOWN\nDOWN\nDOWN\nDOWN\n"
 
           expect {@saver.save_princess}.to output(expected).to_stdout
         end
 
         it 'can find the right directions for a 5x5 board' do
-          allow($stdin).to receive(:gets).and_return(@input_4)
+          allow($stdin).to receive(:gets).and_return("5","","----p","-----","--m--","-----","-----")
           expected = "RIGHT\nRIGHT\nUP\nUP\n"
 
           expect {@saver.save_princess}.to output(expected).to_stdout
