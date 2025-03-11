@@ -10,6 +10,7 @@ class PrincessSaver
 
   def get_input
     @input_reader.get_matrix_size
+    @input_reader.get_robot_coordinates
     @input_reader.get_matrix_rows
   end
 
