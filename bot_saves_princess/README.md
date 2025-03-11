@@ -152,6 +152,7 @@ Your score for every testcase would be (NxN minus number of moves made to rescue
 - Planning:
   - Update directory name to just be bsp
   - Add method to input_reader to get the bot coordinates from input, include condition that checks if input being received is the start of the rows or the coordinates of bot
+    - May need to change creation of bot? will definitely need to have new attribute for the bot coords in input reader
   - Update find_princess method / add new one that is called based what input was received
   - Add next_move method to robot that pulls the next move out of directions and returns it
   - Update save_princess method to only puts the first direction if challenge 2 is detected

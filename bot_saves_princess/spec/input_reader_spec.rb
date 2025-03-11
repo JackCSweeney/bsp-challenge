@@ -102,5 +102,36 @@ RSpec.describe InputReader do
         end
       end
     end
+
+    describe 'get_robot_coordinates' do
+      describe 'Happy Path' do
+        it 'can get the coordinates of the bot from the second input given' do
+          allow($stdin).to receive(:gets).and_return("5")
+          @reader.get_matrix_size
+          allow($stdin).to receive(:gets).and_return("2 3")
+          @reader.get_robot_coordinates
+
+          expect(@reader.robot_coordinates).to eq([3,2])
+        end
+
+        it 'can get the coordinates of the bot from a different second input' do
+          allow($stdin).to receive(:gets).and_return("5")
+          @reader.get_matrix_size
+          allow($stdin).to receive(:gets).and_return("3 0")
+          @reader.get_robot_coordinates
+
+          expect(@reader.robot_coordinates).to eq([0,3])
+        end
+
+        it 'will only set the coordinates if the second input received are integers' do
+          allow($stdin).to receive(:gets).and_return("3")
+          @reader.get_matrix_size
+          allow($stdin).to receive(:gets).and_return("---\n---\n---\n")
+          @reader.get_robot_coordinates
+
+          expect(@reader.robot_coordinates).to eq([])
+        end
+      end
+    end
   end
 end
