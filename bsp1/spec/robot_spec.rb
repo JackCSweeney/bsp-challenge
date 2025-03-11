@@ -19,11 +19,11 @@ RSpec.describe Robot do
     describe '#directions_to_princess' do
       describe 'Happy Path' do
         it 'returns the correct steps needed to save the princess' do
-          matrix = Matrix.new(3, ['-p-','-m-','---'])
+          matrix = Matrix.new(3, ['p--','-m-','---'])
           p_coords = matrix.princess.coords
           robot = matrix.robot
 
-          expect(robot.directions_to_princess(p_coords)).to eq(["UP"])
+          expect(robot.directions_to_princess(p_coords)).to eq(["LEFT", "UP"])
         end
 
         it 'can return the correct steps with the princess in a different location' do

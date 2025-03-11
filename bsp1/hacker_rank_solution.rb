@@ -8,13 +8,11 @@ class InputReader
 
   def get_matrix_size
     size = $stdin.gets[0].to_i
-    validate_size_input(size)
-    @size = size
+    @size = validate_size_input(size)
   end
 
   def validate_size_input(size)
     raise ArgumentError.new("Invalid size: Size must be an odd number between 3 and 100") if size < 3 || size > 100 || size.even?
-    
     size
   end
 
@@ -23,8 +21,7 @@ class InputReader
     @size.times do
       rows << $stdin.gets.chomp
     end
-    validate_row_input(rows)
-    @matrix_rows = rows
+    @matrix_rows = validate_row_input(rows)
   end
 
   def validate_row_input(rows)
@@ -92,12 +89,14 @@ class Matrix
   end
 
   def get_princess_coords
-    for i in (0...@size) do
-      for j in (0...@size) do
-        if @grid[i][j] == 'p'
-          return [j, i]
-        end
-      end
+    if @grid[0][0] == 'p'
+      [0,0]
+    elsif @grid[0][@size - 1] == 'p'
+      [@size - 1, 0]
+    elsif @grid[@size - 1][0] == 'p'
+      [0,@size - 1]
+    else
+      [@size - 1, @size - 1]
     end
   end
 

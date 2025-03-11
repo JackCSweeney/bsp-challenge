@@ -12,12 +12,14 @@ class Matrix
   end
 
   def get_princess_coords
-    for i in (0...@size) do
-      for j in (0...@size) do
-        if @grid[i][j] == 'p'
-          return [j, i]
-        end
-      end
+    if @grid[0][0] == 'p'
+      [0,0]
+    elsif @grid[0][@size - 1] == 'p'
+      [@size - 1, 0]
+    elsif @grid[@size - 1][0] == 'p'
+      [0,@size - 1]
+    else
+      [@size - 1, @size - 1]
     end
   end
 
