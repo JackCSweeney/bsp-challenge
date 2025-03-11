@@ -115,12 +115,12 @@ RSpec.describe InputReader do
         end
 
         it 'can get the coordinates of the bot from a different second input' do
-          allow($stdin).to receive(:gets).and_return("5")
+          allow($stdin).to receive(:gets).and_return("25")
           @reader.get_matrix_size
-          allow($stdin).to receive(:gets).and_return("3 0")
+          allow($stdin).to receive(:gets).and_return("11 0")
           @reader.get_robot_coordinates
 
-          expect(@reader.robot_coordinates).to eq([0,3])
+          expect(@reader.robot_coordinates).to eq([0,11])
         end
 
         it 'will only set the coordinates if the second input received are integers' do
@@ -130,6 +130,17 @@ RSpec.describe InputReader do
           @reader.get_robot_coordinates
 
           expect(@reader.robot_coordinates).to eq([])
+        end
+      end
+
+      describe 'Sad Path' do
+        it 'raises the correct error if coordinates given are not in range of the given size' do
+          allow($stdin).to receive(:gets).and_return("3")
+          @reader.get_matrix_size
+          allow($stdin).to receive(:gets).and_return("3 0")
+
+          expect {@reader.get_robot_coordinates}.to raise_error(ArgumentError)
+          expect {@reader.get_robot_coordinates}.to raise_error("Invalid location: Robot coordinates must fit with the size of the grid using matrix convention")
         end
       end
     end
