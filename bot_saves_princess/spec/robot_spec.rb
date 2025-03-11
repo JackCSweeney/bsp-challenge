@@ -128,5 +128,18 @@ RSpec.describe Robot do
         expect(robot.directions).to eq(["UP"])
       end
     end
+
+    describe '#change_coordinates(direction_moved)' do
+      it 'updates the coordinates based on the direction moved' do
+        robot = Robot.new([2,2])
+        robot.change_coordinates("UP")
+
+        expect(robot.coords).to eq([2,3])
+
+        robot.change_coordinates("LEFT")
+
+        expect(robot.coords).to eq([1,3])
+      end
+    end
   end
 end
