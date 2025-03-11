@@ -13,9 +13,9 @@ RSpec.describe PrincessSaver do
   before(:each) do
     @saver = PrincessSaver.new
     @input_1 = "3\np--\n-m-\n---"
-    @input_2 = "7\n-------\n-------\n-------\n---m---\n-------\np------\n-------"
-    @input_3 = "9\n---------\n---------\n---------\n---------\n----m----\n---------\n---------\n-------p-\n---------"
-    @input_4 = "5\n---p-\n-----\n--m--\n-----\n-----"
+    @input_2 = "7\n-------\n-------\n-------\n---m---\n-------\n-------\np------"
+    @input_3 = "9\n---------\n---------\n---------\n---------\n----m----\n---------\n---------\n---------\n--------p"
+    @input_4 = "5\n----p\n-----\n--m--\n-----\n-----"
   end
 
   describe '#instance methods' do
@@ -30,21 +30,21 @@ RSpec.describe PrincessSaver do
 
         it 'can find the right directions for a 7x7 board' do
           allow($stdin).to receive(:gets).and_return(@input_2)
-          expected = "LEFT\nLEFT\nLEFT\nDOWN\nDOWN\n"
+          expected = "LEFT\nLEFT\nLEFT\nDOWN\nDOWN\nDOWN\n"
 
           expect {@saver.save_princess}.to output(expected).to_stdout
         end
 
         it 'can find the right directions for a 9x9 board' do
           allow($stdin).to receive(:gets).and_return(@input_3)
-          expected = "RIGHT\nRIGHT\nRIGHT\nDOWN\nDOWN\nDOWN\n"
+          expected = "RIGHT\nRIGHT\nRIGHT\nRIGHT\nDOWN\nDOWN\nDOWN\nDOWN\n"
 
           expect {@saver.save_princess}.to output(expected).to_stdout
         end
 
         it 'can find the right directions for a 5x5 board' do
           allow($stdin).to receive(:gets).and_return(@input_4)
-          expected = "RIGHT\nUP\nUP\n"
+          expected = "RIGHT\nRIGHT\nUP\nUP\n"
 
           expect {@saver.save_princess}.to output(expected).to_stdout
         end
