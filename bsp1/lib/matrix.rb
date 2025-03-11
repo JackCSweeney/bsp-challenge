@@ -1,5 +1,5 @@
-require 'robot.rb'
-require 'princess.rb'
+require_relative 'robot.rb'
+require_relative 'princess.rb'
 
 class Matrix
   attr_reader :size, :grid, :robot, :princess
