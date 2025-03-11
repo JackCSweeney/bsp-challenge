@@ -13,14 +13,8 @@ class Matrix
   end
 
   def get_princess_coords
-    if @grid[0][0] == 'p'
-      [0,0]
-    elsif @grid[0][@size - 1] == 'p'
-      [@size - 1, 0]
-    elsif @grid[@size - 1][0] == 'p'
-      [0,@size - 1]
-    else
-      [@size - 1, @size - 1]
+    grid.flatten.each_with_index do |cell, index|
+      return [index % @size, (index / @size)] if cell == 'p'
     end
   end
 
