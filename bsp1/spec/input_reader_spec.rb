@@ -46,18 +46,21 @@ RSpec.describe InputReader do
           allow($stdin).to receive(:gets).and_return('4')
 
           expect {@reader.get_matrix_size}.to raise_error(ArgumentError)
+          expect {@reader.get_matrix_size}.to raise_error("Invalid size: Size must be an odd number between 3 and 100")
         end
 
         it 'raises an error message if the input value is below 3' do
           allow($stdin).to receive(:gets).and_return('1')
 
           expect {@reader.get_matrix_size}.to raise_error(ArgumentError)
+          expect {@reader.get_matrix_size}.to raise_error("Invalid size: Size must be an odd number between 3 and 100")
         end
 
         it 'raises an error message if the input value is greater than 100' do
           allow($stdin).to receive(:gets).and_return('101')
 
           expect {@reader.get_matrix_size}.to raise_error(ArgumentError)
+          expect {@reader.get_matrix_size}.to raise_error("Invalid size: Size must be an odd number between 3 and 100")
         end
       end
     end
@@ -87,6 +90,7 @@ RSpec.describe InputReader do
           @reader.get_matrix_size
 
           expect {@reader.get_matrix_rows}.to raise_error(ArgumentError)
+          expect {@reader.get_matrix_rows}.to raise_error("Invalid row: Number of rows does not match the input size")
         end
 
         it 'raises an error message if the length of the rows does not match the matrix size' do
@@ -94,6 +98,7 @@ RSpec.describe InputReader do
           @reader.get_matrix_size
 
           expect {@reader.get_matrix_rows}.to raise_error(ArgumentError)
+          expect {@reader.get_matrix_rows}.to raise_error("Invalid row: Size of rows do not match the input size")
         end
       end
     end
