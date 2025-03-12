@@ -4,7 +4,7 @@ class InputReader
   def initialize
     @size = 0
     @matrix_rows = []
-    @robot_coordinates = []
+    @robot_coordinates = {}
   end
 
   def get_matrix_size
@@ -32,13 +32,14 @@ class InputReader
   def get_robot_coordinates
     input = $stdin.gets
     if /[[:digit:]]/.match(input)
-      coords = input.split.map(&:to_i).reverse
-      @robot_coordinates = validate_robot_coordinates(coords)
+      coordinates = input.split.map(&:to_i)
+      @robot_coordinates = validate_robot_coordinates(x: coordinates[1], y: coordinates[0])
     end
   end
 
-  def validate_robot_coordinates(coords)
-    raise ArgumentError.new("Invalid location: Robot coordinates must fit with the size of the grid using matrix convention") if coords.any?{|num| num >= @size}
-    coords
+  def validate_robot_coordinates(x:, y:)
+    raise ArgumentError.new("Invalid location: One or more coordinates for robot are missing") if !x || !y 
+    raise ArgumentError.new("Invalid location: Robot coordinates must fit with the size of the grid using matrix convention") if x >= size || y >= size
+    {x:, y:}
   end
 end
