@@ -25,7 +25,7 @@ RSpec.describe InputReader do
   describe '#instance methods' do
     describe '.get_matrix_size' do
       describe 'Happy Path' do
-        it 'gets the size of the matrix from the stdin' do
+        it 'gets the size of the matrix from stdin' do
           allow($stdin).to receive(:gets).and_return('5')
 
           @reader.get_matrix_size
@@ -33,7 +33,7 @@ RSpec.describe InputReader do
           expect(@reader.size).to eq(5)
         end
 
-        it 'works with a different size' do
+        it 'works with a different size matrix from stdin' do
           allow($stdin).to receive(:gets).and_return('3')
 
           @reader.get_matrix_size
@@ -69,25 +69,33 @@ RSpec.describe InputReader do
     describe '.get_matrix_rows' do
       describe 'Happy Path' do
         it 'can add input rows to its attribute of matrix rows' do
-          allow($stdin).to receive(:gets).and_return("3","---","---","---")
+          allow($stdin).to receive(:gets).and_return("3","p--","-m-","---")
           @reader.get_matrix_size
           @reader.get_matrix_rows
 
-          expect(@reader.matrix_rows).to eq(['---', '---', '---'])
+          expect(@reader.matrix_rows).to eq(['p--', '-m-', '---'])
         end
 
         it 'can add different number of input rows to its attribute of matrix rows' do
-          allow($stdin).to receive(:gets).and_return("5","-----","-----","-----","-----","-----")
+          allow($stdin).to receive(:gets).and_return("5","p----","-----","--m--","-----","-----")
           @reader.get_matrix_size
           @reader.get_matrix_rows
 
-          expect(@reader.matrix_rows).to eq(['-----', '-----', '-----', '-----', '-----'])
+          expect(@reader.matrix_rows).to eq(['p----', '-----', '--m--', '-----', '-----'])
         end
       end
 
       describe 'Sad Path' do
         it 'raises an error message if the length of the rows does not match the matrix size' do
-          allow($stdin).to receive(:gets).and_return("3","---","---","--")
+          allow($stdin).to receive(:gets).and_return("3","p--","-m-","--")
+          @reader.get_matrix_size
+
+          expect {@reader.get_matrix_rows}.to raise_error(ArgumentError)
+          expect {@reader.get_matrix_rows}.to raise_error("Invalid row: Size of rows do not match the input size")
+        end
+
+        it 'raises an error message if the length of the rows does not match the matrix size for a different size' do
+          allow($stdin).to receive(:gets).and_return("5","p----","-----","--m--","-----", "----")
           @reader.get_matrix_size
 
           expect {@reader.get_matrix_rows}.to raise_error(ArgumentError)
