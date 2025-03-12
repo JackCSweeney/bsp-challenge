@@ -12,7 +12,7 @@ RSpec.describe Princess do
     it 'has a coords attribute' do
       princess = Princess.new(x:0, y:0)
 
-      expect(princess.coords).to eq({x:0, y:0})
+      expect(princess.coordinates).to eq({x:0, y:0})
     end
   end
 end
