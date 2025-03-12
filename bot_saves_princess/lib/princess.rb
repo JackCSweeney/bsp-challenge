@@ -1,7 +1,4 @@
+require_relative 'positionable.rb'
 class Princess
-  attr_reader :coordinates
-
-  def initialize(x:, y:)
-    @coordinates = {x:, y:}
-  end
+  include Positionable
 end
