@@ -4,7 +4,7 @@ require_relative 'princess.rb'
 class Matrix
   attr_reader :size, :grid, :robot, :princess
 
-  def initialize(size, rows, robot_coordinates=nil)
+  def initialize(size, rows, robot_coordinates={})
     @size = size
     @grid = rows.map {|row| row.chars}
     @robot_coordinates = robot_coordinates
