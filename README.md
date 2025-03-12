@@ -1,7 +1,7 @@
 # <p style="text-align: center;">Bot Saves Princess</p>
 
 ## About
-This repository is my solution to the [Bot Saves Princess](https://www.hackerrank.com/challenges/saveprincess) and [Bot Saves Princess 2](https://www.hackerrank.com/challenges/saveprincess2) challenges from HackerRank for a SESAC take home coding challenge. Below you can find instructions on what code should be pasted into the solution section of both challenges, how to run the test suite, and how to utilize the runner file to run the code locally in your terminal. You will also find information about my approach to this challenge, reasoning behind design decisions, challenging areas through the process of implementing this solution, and potential changes or improvements.
+This repository is my solution to the [Bot Saves Princess](https://www.hackerrank.com/challenges/saveprincess) and [Bot Saves Princess 2](https://www.hackerrank.com/challenges/saveprincess2) challenges from HackerRank for a SESAC take home coding challenge. Below you can find instructions on what code should be pasted into the solution section of both challenges, how to run the test suite, and how to utilize the runner file to run the code locally in your terminal. You will also find information about my approach to this challenge, reasoning behind design decisions, challenging areas through the process of implementing this solution, and potential changes or additions.
 
 ### Code for HackerRank Website
 **For First Challenge:**
@@ -98,3 +98,11 @@ ruby bot_saves_princess/runner.rb
   - Thinking of potential future constraints that could be added to the problem and if anything about my implementation would make those more difficult to handle was another helpful factor along with making sure that the code would work for both challenges with little to no changes
 - Testing multiple sequential inputs from STDIN proved to be difficult at times when stubbing the inputs as it would continue on to the next input immediately after gets was called, which wasn't reflective of the same behavior when manually testing the code or testing it in the Hacker Rank website
   - This led to a few changes with how `gets` was used by the InputReader in order to make the code more testable, sacrificing a few extra lines of code to store the input in a temporary variable, preventing it from making additional calls of `gets` before finishing any of its validations
+
+### Potential Changes / Additions
+- Since both Hacker Rank challenges are solved by the current code, these would likely just be optimizations or fun additions to implement in the future
+  - Currently, only the coordinates of the Robot change when `next_move` is called. If you were to want to make it into more of a *game*, having the board update the location of the Robot as well and display that with each move would be a nice addition
+  - Setting up the runner.rb file so that it returns what the board looks like after each move would be a fun touch and would require the above addition/change
+  - More thorough validations to handle more potential edge cases would be a nice addition
+  - I'm uncertain of if it would be much more efficient or not (especially at smaller scales), but when the input is being read by InputReader, potentially flagging the location of the Princess and passing that through the classes rather than searching for it afterwards may be an optimization area
+  - Adding a Movable module to hold onto the movement logic from Positionable would potentially add a little bit of clarity to the responsibilities of both
