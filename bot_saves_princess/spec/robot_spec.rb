@@ -17,34 +17,53 @@ RSpec.describe Robot do
     end
 
     describe '#directions_to_princess' do
-      describe 'Happy Path' do
-        it 'returns the correct steps needed to save the princess' do
-          princess = Princess.new(x:0, y:0)
-          robot = Robot.new(x:1, y:1)
+      it 'will return the correct steps with the princess in the top left corner of a 3x3 grid' do
+        princess = Princess.new(x:0, y:0)
+        robot = Robot.new(x:1, y:1)
 
-          expect(robot.directions_to_princess(princess.coordinates)).to eq(["LEFT", "UP"])
-        end
+        expect(robot.directions_to_princess(princess.coordinates)).to eq(["LEFT", "UP"])
+      end
 
-        it 'can return the correct steps with the princess in a different location' do
-          princess = Princess.new(x:2, y:0)
-          robot = Robot.new(x:1, y:1)
+      it 'will return the correct steps with the princess in the top right corner of a 3x3 grid' do
+        princess = Princess.new(x:2, y:0)
+        robot = Robot.new(x:1, y:1)
 
-          expect(robot.directions_to_princess(princess.coordinates)).to eq(["RIGHT", "UP"])
-        end
+        expect(robot.directions_to_princess(princess.coordinates)).to eq(["RIGHT", "UP"])
+      end
 
-        it 'can return the correct steps with a different sized grid' do
-          princess = Princess.new(x:4, y:4)
-          robot = Robot.new(x:2, y:2)
+      it 'will return the correct steps in a 5x5 grid and the princess in the bottom right corner' do
+        princess = Princess.new(x:4, y:4)
+        robot = Robot.new(x:2, y:2)
 
-          expect(robot.directions_to_princess(princess.coordinates)).to eq(["RIGHT", "RIGHT", "DOWN", "DOWN"])
-        end
+        expect(robot.directions_to_princess(princess.coordinates)).to eq(["RIGHT", "RIGHT", "DOWN", "DOWN"])
+      end
 
-        it 'can return the correct steps with a different sized grid going left' do
-          princess = Princess.new(x:0, y:4)
-          robot = Robot.new(x:2, y:2)
+      it 'will return the correct steps in a 5x5 grid and the princess in the bottom left corner' do
+        princess = Princess.new(x:0, y:4)
+        robot = Robot.new(x:2, y:2)
 
-          expect(robot.directions_to_princess(princess.coordinates)).to eq(["LEFT", "LEFT", "DOWN", "DOWN"])
-        end
+        expect(robot.directions_to_princess(princess.coordinates)).to eq(["LEFT", "LEFT", "DOWN", "DOWN"])
+      end
+
+      it 'will return the correct steps in a 5x5 grid when the princess is not in a corner and bot is in center' do
+        princess = Princess.new(x:0, y:3)
+        robot = Robot.new(x:2, y:2)
+
+        expect(robot.directions_to_princess(princess.coordinates)).to eq(["LEFT", "LEFT", "DOWN"])
+      end
+
+      it 'will return the correct steps in a 5x5 grid when the princess is not in a corner and bot is not in the center' do
+        princess = Princess.new(x:0, y:3)
+        robot = Robot.new(x:3, y:0)
+
+        expect(robot.directions_to_princess(princess.coordinates)).to eq(["LEFT", "LEFT", "LEFT", "DOWN", "DOWN", "DOWN"])
+      end
+
+      it 'will return empty directions when the bot and princess are in the same location in the grid' do
+        princess = Princess.new(x:3, y:3)
+        robot = Robot.new(x:3, y:3)
+
+        expect(robot.directions_to_princess(princess.coordinates)).to eq([])
       end
     end
 
