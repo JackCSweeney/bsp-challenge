@@ -83,5 +83,63 @@ RSpec.describe Robot do
         expect(robot.directions).to eq(["DOWN", "DOWN"])
       end
     end
+
+    describe '#next_move' do
+      it 'returns the next move it should make to get closer to the princess' do
+        p_coords = [4,4]
+        robot = Robot.new([2,2])
+        robot.directions_to_princess(p_coords)
+
+        expect(robot.next_move).to eq("RIGHT")
+      end
+
+      it 'updates the directions attribute to remove the move it just made' do
+        p_coords = [4,4]
+        robot = Robot.new([2,2])
+        robot.directions_to_princess(p_coords)
+
+        expect(robot.directions).to eq(["RIGHT", "RIGHT", "DOWN", "DOWN"])
+
+        robot.next_move
+
+        expect(robot.directions).to eq(["RIGHT", "DOWN", "DOWN"])
+      end
+
+      it 'updates the robots coordinates based on its move' do
+        p_coords = [4,4]
+        robot = Robot.new([2,2])
+        robot.directions_to_princess(p_coords)
+        robot.next_move
+
+        expect(robot.coords).to eq([3,2])
+
+        robot.next_move
+
+        expect(robot.coords).to eq([4,2])
+      end
+
+      it 'works with a different grid and location' do
+        p_coords = [2,0]
+        robot = Robot.new([2,2])
+        robot.directions_to_princess(p_coords)
+
+        expect(robot.directions).to eq(["UP", "UP"])
+        expect(robot.next_move).to eq("UP")
+        expect(robot.directions).to eq(["UP"])
+      end
+    end
+
+    describe '#change_coordinates(direction_moved)' do
+      it 'updates the coordinates based on the direction moved' do
+        robot = Robot.new([2,2])
+        robot.change_coordinates("UP")
+
+        expect(robot.coords).to eq([2,3])
+
+        robot.change_coordinates("LEFT")
+
+        expect(robot.coords).to eq([1,3])
+      end
+    end
   end
 end
