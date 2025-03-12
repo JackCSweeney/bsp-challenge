@@ -1,7 +1,4 @@
 require_relative './spec_helper.rb'
-require_relative '../lib/direction_manager.rb'
-require_relative '../lib/princess.rb'
-require_relative '../lib/robot.rb'
 
 RSpec.describe DirectionManager do
   describe 'Initialize' do

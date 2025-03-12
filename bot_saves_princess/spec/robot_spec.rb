@@ -1,6 +1,4 @@
 require_relative './spec_helper'
-require_relative '../lib/robot.rb'
-require_relative '../lib/matrix.rb'
 
 RSpec.describe Robot do
   describe 'Initialize' do
