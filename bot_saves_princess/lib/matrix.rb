@@ -19,7 +19,7 @@ class Matrix
   end
 
   def coordinates_for_robot
-    @robot_coordinates = {x: (size / 2), y: (size / 2)} if !@robot_coordinates
+    @robot_coordinates = {x: (size / 2), y: (size / 2)} if !@robot_coordinates[:x] || !@robot_coordinates[:y]
     @robot_coordinates
   end
 end
