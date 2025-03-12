@@ -137,7 +137,15 @@ class PrincessSaver
   end
 end
 
+# Challenge 1
+saver = PrincessSaver.new
+saver.input_reader.get_matrix_size
+saver.input_reader.get_matrix_rows
+saver.make_matrix
 
+puts saver.directions_to_princess
+
+# Challenge 2
 saver = PrincessSaver.new
 saver.input_reader.get_matrix_size
 saver.input_reader.get_robot_coordinates
