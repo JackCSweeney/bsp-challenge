@@ -1,5 +1,6 @@
-require_relative 'positionable.rb'
-require_relative 'direction_manager.rb'
+require_relative 'positionable'
+require_relative 'direction_manager'
+
 class Robot
   include Positionable
   attr_reader :directions

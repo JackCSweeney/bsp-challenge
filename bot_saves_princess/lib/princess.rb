@@ -1,4 +1,5 @@
-require_relative 'positionable.rb'
+require_relative 'positionable'
+
 class Princess
   include Positionable
 end
