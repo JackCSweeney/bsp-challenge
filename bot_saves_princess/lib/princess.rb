@@ -1,7 +1,7 @@
 class Princess
   attr_reader :coords
 
-  def initialize(coords)
-    @coords = coords
+  def initialize(x:, y:)
+    @coords = {x:, y:}
   end
 end
