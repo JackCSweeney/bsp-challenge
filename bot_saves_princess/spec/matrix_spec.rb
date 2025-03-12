@@ -4,25 +4,25 @@ require_relative '../lib/matrix.rb'
 RSpec.describe Matrix do
   describe 'Initialize' do
     it 'exists' do
-      matrix = Matrix.new(3, ['---','---','---'])
+      matrix = Matrix.new(3, ['---','-m-','--p'])
 
       expect(matrix).to be_a(Matrix)
     end
 
     it 'has a readable size attribute' do
-      matrix = Matrix.new(3, ['---','---','---'])
+      matrix = Matrix.new(3, ['---','-m-','--p'])
 
       expect(matrix.size).to eq(3)
     end
 
     it 'has a readable grid attribute that maps the rows it is initialized with' do
-      matrix = Matrix.new(3, ['---','---','---'])
+      matrix = Matrix.new(3, ['---','-m-','--p'])
 
       expect(matrix.grid).to eq([['-','-','-'], ['-','-','-'], ['-','-','-']])
     end
 
     it 'has a readable robot attribute that is an instance of a robot with the correct coords' do
-      matrix = Matrix.new(3, ['---','-m-','---'])
+      matrix = Matrix.new(3, ['---','-m-','--p'])
 
       expect(matrix.robot).to be_a(Robot)
       expect(matrix.robot.coords).to eq([1,1])
