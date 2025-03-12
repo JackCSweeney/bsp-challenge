@@ -142,7 +142,7 @@ RSpec.describe InputReader do
           allow($stdin).to receive(:gets).and_return("3 ")
 
           expect {@reader.get_robot_coordinates}.to raise_error(ArgumentError)
-          expect {@reader.get_robot_coordinates}.to raise_error("Invalid location: Robot coordinates must fit with the size of the grid using matrix convention")
+          expect {@reader.get_robot_coordinates}.to raise_error("Invalid location: One or more coordinates for robot are missing")
         end
       end
     end
