@@ -1,5 +1,4 @@
 require_relative './spec_helper'
-require_relative '../lib/princess.rb'
 
 RSpec.describe Princess do
   describe 'Initialize' do

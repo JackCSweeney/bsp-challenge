@@ -1,5 +1,4 @@
 require_relative './spec_helper'
-require_relative '../lib/input_reader.rb'
 
 RSpec.describe InputReader do
   describe 'Initialize' do

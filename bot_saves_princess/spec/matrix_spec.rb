@@ -1,5 +1,4 @@
 require_relative './spec_helper'
-require_relative '../lib/matrix.rb'
 
 RSpec.describe Matrix do
   describe 'Initialize' do
@@ -78,28 +77,32 @@ RSpec.describe Matrix do
     end
 
     describe '#coordinates_for_robot' do
-      it 'will return the location of the robot from the grid as the center when robot_coords attribute is not provided as an argument with initialization' do
+      it 'will set the location of the robot from the grid as the center when robot_coords attribute is not provided as an argument with initialization' do
         matrix = Matrix.new(3, ['p--','-m-','---'])
+        matrix.coordinates_for_robot({})
 
-        expect(matrix.coordinates_for_robot).to eq({x:1, y:1})
+        expect(matrix.robot.coordinates).to eq({x:1, y:1})
       end
 
-      it 'will return the location of the robot from a different size grid as the center when robot_coords attribute is not provided as an argument with initialization' do
+      it 'will set the location of the robot from a different size grid as the center when robot_coords attribute is not provided as an argument with initialization' do
         matrix = Matrix.new(5, ['p----','-----','--m--','-----','-----'])
+        matrix.coordinates_for_robot({})
 
-        expect(matrix.coordinates_for_robot).to eq({x:2, y:2})
+        expect(matrix.robot.coordinates).to eq({x:2, y:2})
       end
 
-      it 'will return the location of the robot from the grid as the given coordinates when present' do
+      it 'will set the location of the robot from the grid as the given coordinates when present' do
         matrix = Matrix.new(5, ['-----','m----','-----','-----','----p'], {x:0, y:1})
+        matrix.coordinates_for_robot({x:0, y:1})
 
-        expect(matrix.coordinates_for_robot).to eq({x:0, y:1})
+        expect(matrix.robot.coordinates).to eq({x:0, y:1})
       end
 
-      it 'will return the location of the robot from the grid as the given coordinates when present for a different location' do
+      it 'will set the location of the robot from the grid as the given coordinates when present for a different location' do
         matrix = Matrix.new(5, ['-----','-----','-----','--m--','----p'], {x:2, y:3})
+        matrix.coordinates_for_robot({x:2, y:3})
 
-        expect(matrix.coordinates_for_robot).to eq({x:2, y:3})
+        expect(matrix.robot.coordinates).to eq({x:2, y:3})
       end
     end
   end
