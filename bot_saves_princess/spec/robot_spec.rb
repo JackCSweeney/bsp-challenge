@@ -48,33 +48,33 @@ RSpec.describe Robot do
       end
     end
 
-    describe '#x_axis_moves(x_axis_distance)' do
+    describe '#x_axis_directions(x_axis_distance)' do
       it 'adds the directions needed on the x-axis to the directions attribute of robot' do
         robot = Robot.new(x:2, y:2)
-        robot.x_axis_moves(-2)
+        robot.x_axis_directions(-2)
         
         expect(robot.directions).to eq(["RIGHT", "RIGHT"])
       end
 
       it 'works in the other direction' do
         robot = Robot.new(x:2, y:2)
-        robot.x_axis_moves(2)
+        robot.x_axis_directions(2)
         
         expect(robot.directions).to eq(["LEFT", "LEFT"])
       end
     end
 
-    describe '#y_axis_moves(y_axis_distance)' do
+    describe '#y_axis_directions(y_axis_distance)' do
       it 'adds the directions needed on the y-axis to the directions attribute of robot' do
         robot = Robot.new(x:2, y:2)
-        robot.y_axis_moves(2)
+        robot.y_axis_directions(2)
         
         expect(robot.directions).to eq(["UP", "UP"])
       end
 
       it 'works in the other direction' do
         robot = Robot.new(x:2, y:2)
-        robot.y_axis_moves(-2)
+        robot.y_axis_directions(-2)
         
         expect(robot.directions).to eq(["DOWN", "DOWN"])
       end
@@ -82,17 +82,17 @@ RSpec.describe Robot do
 
     describe '#next_move' do
       it 'returns the next move it should make to get closer to the princess' do
-        p_coords = [4,4]
-        robot = Robot.new([2,2])
-        robot.directions_to_princess(p_coords)
+        princess = Princess.new(x:4, y:4)
+        robot = Robot.new(x:2, y:2)
+        robot.directions_to_princess(princess.coordinates)
 
         expect(robot.next_move).to eq("RIGHT")
       end
 
       it 'updates the directions attribute to remove the move it just made' do
-        p_coords = [4,4]
-        robot = Robot.new([2,2])
-        robot.directions_to_princess(p_coords)
+        princess = Princess.new(x:4, y:4)
+        robot = Robot.new(x:2, y:2)
+        robot.directions_to_princess(princess.coordinates)
 
         expect(robot.directions).to eq(["RIGHT", "RIGHT", "DOWN", "DOWN"])
 
@@ -102,22 +102,22 @@ RSpec.describe Robot do
       end
 
       it 'updates the robots coordinates based on its move' do
-        p_coords = [4,4]
-        robot = Robot.new([2,2])
-        robot.directions_to_princess(p_coords)
+        princess = Princess.new(x:4, y:4)
+        robot = Robot.new(x:2, y:2)
+        robot.directions_to_princess(princess.coordinates)
         robot.next_move
 
-        expect(robot.coords).to eq([3,2])
+        expect(robot.coordinates).to eq({x:3, y:2})
 
         robot.next_move
 
-        expect(robot.coords).to eq([4,2])
+        expect(robot.coordinates).to eq({x:4, y:2})
       end
 
       it 'works with a different grid and location' do
-        p_coords = [2,0]
-        robot = Robot.new([2,2])
-        robot.directions_to_princess(p_coords)
+        princess = Princess.new(x:2, y:0)
+        robot = Robot.new(x:2, y:2)
+        robot.directions_to_princess(princess.coordinates)
 
         expect(robot.directions).to eq(["UP", "UP"])
         expect(robot.next_move).to eq("UP")
@@ -125,16 +125,29 @@ RSpec.describe Robot do
       end
     end
 
-    describe '#change_coordinates(direction_moved)' do
+    describe '#move_robot_on_y_axis(next_direction)' do
       it 'updates the coordinates based on the direction moved' do
-        robot = Robot.new([2,2])
-        robot.change_coordinates("UP")
+        robot = Robot.new(x:2, y:2)
+        robot.move_robot_on_y_axis("UP")
 
-        expect(robot.coords).to eq([2,3])
+        expect(robot.coordinates).to eq(x:2, y:3)
 
-        robot.change_coordinates("LEFT")
+        robot.move_robot_on_y_axis("DOWN")
 
-        expect(robot.coords).to eq([1,3])
+        expect(robot.coordinates).to eq(x:2, y:2)
+      end
+    end
+
+    describe '#move_robot_on_x_axis(next_direction)' do
+      it 'updates the coordinates based on the direction moved' do
+        robot = Robot.new(x:2, y:2)
+        robot.move_robot_on_x_axis("LEFT")
+
+        expect(robot.coordinates).to eq({x:1, y:2})
+
+        robot.move_robot_on_x_axis("RIGHT")
+
+        expect(robot.coordinates).to eq({x:2, y:2})
       end
     end
   end
