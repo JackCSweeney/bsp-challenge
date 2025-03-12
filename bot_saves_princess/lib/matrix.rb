@@ -4,25 +4,22 @@ require_relative 'princess.rb'
 class Matrix
   attr_reader :size, :grid, :robot, :princess
 
-  def initialize(size, rows, robot_coords=[])
+  def initialize(size, rows, robot_coordinates={})
     @size = size
     @grid = rows.map {|row| row.chars}
-    @robot_coords = robot_coords
-    @robot = Robot.new(set_coords_for_robot)
-    @princess = Princess.new(get_princess_coords)
+    @robot_coordinates = robot_coordinates
+    @robot = Robot.new(x: coordinates_for_robot[:x], y: coordinates_for_robot[:y])
+    @princess = Princess.new(x: coordinates_for_princess[:x], y: coordinates_for_princess[:y])
   end
 
-  def get_princess_coords
+  def coordinates_for_princess
     grid.flatten.each_with_index do |cell, index|
-      return [index % @size, (index / @size)] if cell == 'p'
+      return {x: (index % @size), y: (index / @size)} if cell == 'p'
     end
   end
 
-  def set_coords_for_robot
-    if @robot_coords.empty?
-      [(@size / 2), (@size / 2)]
-    else
-      @robot_coords
-    end
+  def coordinates_for_robot
+    @robot_coordinates = {x: (size / 2), y: (size / 2)} if !@robot_coordinates[:x] || !@robot_coordinates[:y]
+    @robot_coordinates
   end
 end
