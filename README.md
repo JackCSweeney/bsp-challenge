@@ -5,14 +5,14 @@ This repository is my solution to the [Bot Saves Princess](https://www.hackerran
 
 ### Code for HackerRank Website
 **For First Challenge:**
-- Copy lines 1 - 160 from bot_saves_princess/hacker_rank_solution.rb file
+- Copy lines 1 - 160 from hacker_rank_solution.rb file
 - Paste code into code editor at bottom of [this page](https://www.hackerrank.com/challenges/saveprincess)
 - Select Ruby as language if not already selected in drop down menu at top of code editor
 - Click 'Run Code'
 - Click play button in Game 1 box that appears after loading has completed
 
 **For Second Challenge:**
-- Copy lines 1 - 152 and 163-169 from bot_saves_princess/hacker_rank_solution.rb file
+- Copy lines 1 - 152 and 163-169 from hacker_rank_solution.rb file
 - Paste code into code editor at bottom of [this page](https://www.hackerrank.com/challenges/saveprincess2)
 - Select Ruby as language if not already selected in drop down menu at top of code editor
 - Click 'Run Code'
@@ -29,11 +29,11 @@ bundle install
 ```
 3. Run test suite
 ```
-bundle exec rspec bot_saves_princess/spec
+bundle exec rspec 
 ```
 4. Run runner.rb file and follow instructions in terminal
 ```
-ruby bot_saves_princess/runner.rb
+ruby runner.rb
 ```
 
 ### Approach
