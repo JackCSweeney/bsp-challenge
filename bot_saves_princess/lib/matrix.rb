@@ -6,10 +6,9 @@ class Matrix
 
   def initialize(size, rows, robot_coordinates={})
     @size = size
-    @grid = rows.map {|row| row.chars}
-    @robot_coordinates = robot_coordinates
-    @robot = Robot.new(x: coordinates_for_robot[:x], y: coordinates_for_robot[:y])
-    @princess = Princess.new(x: coordinates_for_princess[:x], y: coordinates_for_princess[:y])
+    @grid = rows.map(&:chars)
+    @robot = Robot.new(**coordinates_for_robot(robot_coordinates))
+    @princess = Princess.new(**coordinates_for_princess)
   end
 
   def coordinates_for_princess
@@ -18,8 +17,8 @@ class Matrix
     end
   end
 
-  def coordinates_for_robot
-    @robot_coordinates = {x: (size / 2), y: (size / 2)} if !@robot_coordinates[:x] || !@robot_coordinates[:y]
-    @robot_coordinates
+  def coordinates_for_robot(provided_coordinates)
+    return provided_coordinates if provided_coordinates[:x] && provided_coordinates[:y]
+    {x: (size / 2), y: (size / 2)}
   end
 end
