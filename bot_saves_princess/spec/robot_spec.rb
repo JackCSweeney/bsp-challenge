@@ -62,27 +62,27 @@ RSpec.describe Robot do
         end
       end
 
-      describe '#move_robot_on_y_axis(next_direction)' do
+      describe '#move_on_y_axis(next_direction)' do
         it 'updates the coordinates based on the direction moved' do
           robot = Robot.new(x:2, y:2)
-          robot.move_robot_on_y_axis("UP")
+          robot.move_on_y_axis(1)
 
           expect(robot.coordinates).to eq(x:2, y:3)
 
-          robot.move_robot_on_y_axis("DOWN")
+          robot.move_on_y_axis(-1)
 
           expect(robot.coordinates).to eq(x:2, y:2)
         end
       end
 
-      describe '#move_robot_on_x_axis(next_direction)' do
+      describe '#move_on_x_axis(next_direction)' do
         it 'updates the coordinates based on the direction moved' do
           robot = Robot.new(x:2, y:2)
-          robot.move_robot_on_x_axis("LEFT")
+          robot.move_on_x_axis(-1)
 
           expect(robot.coordinates).to eq({x:1, y:2})
 
-          robot.move_robot_on_x_axis("RIGHT")
+          robot.move_on_x_axis(1)
 
           expect(robot.coordinates).to eq({x:2, y:2})
         end
