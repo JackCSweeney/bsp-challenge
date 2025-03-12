@@ -9,11 +9,12 @@ RSpec.describe InputReader do
       expect(reader).to be_a(InputReader)
     end
 
-    it 'is initialized with size and matrix_rows attributes as 0 and an empty array' do
+    it 'is initialized with size, matrix_rows, and robot_coordinates attributes as 0, an empty array, and an empty hash respectively' do
       reader = InputReader.new
 
       expect(reader.size).to eq(0)
       expect(reader.matrix_rows).to eq([])
+      expect(reader.robot_coordinates).to eq({})
     end
   end
 
@@ -85,14 +86,6 @@ RSpec.describe InputReader do
       end
 
       describe 'Sad Path' do
-        # it 'raises an error message if the number of rows do not match the input size' do
-        #   allow($stdin).to receive(:gets).and_return("5","-----","-----","-----","-----", "\n")
-        #   @reader.get_matrix_size
-
-        #   expect {@reader.get_matrix_rows}.to raise_error(ArgumentError)
-        #   expect {@reader.get_matrix_rows}.to raise_error("Invalid row: Number of rows does not match the input size")
-        # end
-
         it 'raises an error message if the length of the rows does not match the matrix size' do
           allow($stdin).to receive(:gets).and_return("3","---","---","--")
           @reader.get_matrix_size
@@ -111,7 +104,7 @@ RSpec.describe InputReader do
           allow($stdin).to receive(:gets).and_return("2 3")
           @reader.get_robot_coordinates
 
-          expect(@reader.robot_coordinates).to eq([3,2])
+          expect(@reader.robot_coordinates).to eq({x:3, y:2})
         end
 
         it 'can get the coordinates of the bot from a different second input' do
@@ -120,7 +113,7 @@ RSpec.describe InputReader do
           allow($stdin).to receive(:gets).and_return("11 0")
           @reader.get_robot_coordinates
 
-          expect(@reader.robot_coordinates).to eq([0,11])
+          expect(@reader.robot_coordinates).to eq({x:0, y:11})
         end
 
         it 'will only set the coordinates if the second input received are integers' do
@@ -129,7 +122,7 @@ RSpec.describe InputReader do
           allow($stdin).to receive(:gets).and_return("---","---","---")
           @reader.get_robot_coordinates
 
-          expect(@reader.robot_coordinates).to eq([])
+          expect(@reader.robot_coordinates).to eq({})
         end
       end
 
